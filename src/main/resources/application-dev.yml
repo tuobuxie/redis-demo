@@ -1,0 +1,40 @@
+server:
+  port: 8013
+spring:
+  datasource:
+    url: jdbc:mysql://172.20.2.131:3506/eu_posp_settle?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: loan
+    password: JLpaymysql8.0!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    continue-on-error: true
+  jpa:
+    database: mysql
+    show-sql: true
+  sleuth:
+    sampler:
+      probability: 1
+    messaging:
+      enabled: true
+  redis:
+    cluster:
+      nodes: 172.20.35.64:8000,172.20.35.64:8001,172.20.35.64:8002
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+client:
+  http:
+    connection-request-timeout: 10
+    default-max-per-route: 50
+    max-total: 200
+    socket-timeout: 3000
+    connect-timeout: 1000
